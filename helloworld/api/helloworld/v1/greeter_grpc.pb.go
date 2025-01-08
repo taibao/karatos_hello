@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	"fmt"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -77,6 +78,9 @@ func _Greeter_SayHello_Handler(srv interface{}, ctx context.Context, dec func(in
 	if err := dec(in); err != nil {
 		return nil, err
 	}
+	state := ctx.Value("state")
+	fmt.Println(state)
+
 	if interceptor == nil {
 		return srv.(GreeterServer).SayHello(ctx, in)
 	}
